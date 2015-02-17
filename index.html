@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>parseSearch &amp; formize (unserialize/deserialize)</title>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="formize.js"></script>
+    <script>
+    $(function() {
+        $("pre").text(JSON.stringify(parseSearch(), 4, 4))
+        $("form").formize()
+    })
+    </script>
+</head>
+<body>
+<form>
+    <fieldset>
+        <input type="checkbox" name="checkbox" value="1" checked>
+        <input type="checkbox" name="checkbox" value="2">
+        <input type="checkbox" name="checkbox" value="3" checked>
+    </fieldset>
+    <fieldset>
+        <input type="radio" name="radio" value="1">
+        <input type="radio" name="radio" value="2" checked>
+        <input type="radio" name="radio" value="3">
+    </fieldset>
+    <fieldset>
+        <input name="a" value= "ñõãi">
+        <input name="a" value="[foo] [bar]">
+    </fieldset>
+    <fieldset>
+        <select name="b" size=3>
+            <option>chillax</option>
+            <option selected>hashtag</option>
+            <option>geocache</option>
+        </select>
+        <select name="c" multiple size=3>
+            <option selected>chillax</option>
+            <option>hashtag</option>
+            <option selected>geocache</option>
+        </select>
+    </fieldset>
+    <button>send</button> 
+</form>
+<pre>
+
+</pre>
+</body>
+</html>
