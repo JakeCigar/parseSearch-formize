@@ -17,6 +17,25 @@ Usage
     var formObject= parseSearch(aQueryString)
 ```
 
+serializeFormData
+=================
+Usage
+```JavaScript
+$.ajax({
+    url: "YourServerProgram",
+    type: "POST", // required
+    processData: false, // required
+    contentType: false, // required
+    data: $("form").serializeFormData(), // sends the files as well!
+    success: function() {
+        console.log("Uploaded.", arguments)
+    },
+    error: function() {
+        console.log("Error Uploading.", arguments)
+    },
+})
+
+```
 extra examples
 --------------
 ```JavaScript

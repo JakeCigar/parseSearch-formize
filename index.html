@@ -2,17 +2,42 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <title>parseSearch &amp; formize (unserialize/deserialize)</title>
+    <title>parseSearch &amp; formize &amp; serializeFormData</title>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="formize.js"></script>
     <script>
     $(function() {
-        $("pre").text(JSON.stringify(parseSearch(), 4, 4))
+        $("pre.parms").text(JSON.stringify(parseSearch(), 4, 4))
         $("form").formize()
     })
     </script>
 </head>
 <body>
+<h2> parseSearch </h2>
+<pre>
+var params=<b>parseSearch()</b> // puts the ?foo=bar&more=stuff into an Object!
+</pre>
+<h2> formize </h2>
+<pre>
+$("form")<b>.formize()</b> // fills in the form values from a query string!
+</pre>
+<h2> serializeFormData </h2>
+<pre>
+$.ajax({
+	url: "YourServerProgram",
+	type: "POST", // required
+	processData: false, // required
+	contentType: false, // required
+	data: $("form")<b>.serializeFormData()</b>, // sends the files as well!
+	success: function() {
+		console.log("Uploaded.", arguments)
+	},
+	error: function() {
+		console.log("Error Uploading.", arguments)
+	},
+})
+</pre>
+<h2> a simple form that is filled from the URL’s query string.</h2>
 <form>
     <fieldset>
         <input type="checkbox" name="checkbox" value="1" checked>
@@ -25,7 +50,7 @@
         <input type="radio" name="radio" value="3">
     </fieldset>
     <fieldset>
-        <input name="a" value= "ñõãi">
+        <input name="a" value= "JΛ̊KE">
         <input name="a" value="[foo] [bar]">
     </fieldset>
     <fieldset>
@@ -40,10 +65,13 @@
             <option selected>geocache</option>
         </select>
     </fieldset>
+    <fieldset>
+        <input name="f" type="file" multiple>
+        <input name="g" type="file" multiple>
+    </fieldset>
     <button>send</button> 
 </form>
-<pre>
-
+<pre class="parms">
 </pre>
 </body>
 </html>
