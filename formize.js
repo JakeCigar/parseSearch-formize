@@ -18,6 +18,19 @@ $.fn.formize = function(values) {
         })
     })
 }
+$.fn.toJSON = function(){
+    var o = {}
+    $.each(this.serializeArray(), function(i,el) {
+        var e=o[el.name]
+        if (e===undefined)
+            o[el.name] = el.value
+        else if (e.push) 
+            e.push(el.value)
+        else 
+            o[el.name]=[e,el.value]
+    });
+    return o
+}
 
 function parseSearch(string) {
     string = string ||location.search 
@@ -35,11 +48,11 @@ function parseSearch(string) {
     return searchObject
 }
 $.fn.serializeFormData = function() {
+    if (this.prop("nodeName")==="FORM")
+        return new FormData(this[0])
     var formData = new FormData(),
-        elements = this.prop("elements"),
-        fileElements = (elements? $(elements) : this).filter(":file"),
+        fileElements = this.filter(":file"),
         append=function(n,v) {
-//             console.log("fd",arguments)
             return formData.append(n,v)
         }
     $.each(this.serializeArray(), function (i, val) {
